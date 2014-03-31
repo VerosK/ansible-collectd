@@ -1,0 +1,31 @@
+---
+- name: Install collectd package
+  yum: name=collectd,collectd-rrdtool enablerepo=epel
+  when: ansible_os_family == 'RedHat'
+
+  # FIXME: Install collectd on Debian
+
+- name: Set basic collectd config
+  template: src=collectd.conf.j2 dest=/etc/collectd.conf
+  notify: reload collectd
+
+- name: Setup logging file
+  template: src=00-logging.conf.j2 dest=/etc/collectd.d/00-logging.conf
+  notify: reload collectd
+
+- name: Install input plugins
+  template: src=input-plugins/{{item}}.conf.j2 dest=/etc/collectd.d/{{item}}-plugin.conf
+  with_items: collectd_plugins
+  notify: reload collectd
+
+- name: Create RRD directory
+  file: dest=/var/lib/collectd/rrdtool
+  when: "'rrdtool' in with_output_plugins"
+
+- name: Install output plugins
+  template: src=output-plugins/{{item}}.conf.j2 dest=/etc/collectd.d/{{item}}-plugin.conf
+  with_items: with_output_plugins
+  notify: reload collectd
+
+- name: Enable and start collectd service
+  service: name=collectd enabled=yes state=started

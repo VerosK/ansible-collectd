@@ -1,0 +1,13 @@
+# {{ ansible_managed }}
+#
+# Don't touch!
+
+LoadPlugin network
+
+<Plugin network>
+    <Server "{{ with_send_to }}" "25825">
+    #   SecurityLevel   Encrypt
+    #   Username        "user"
+    #   Password        "secret"
+    </Server>
+</Plugin>

@@ -1,0 +1,11 @@
+# {{ ansible_managed }}
+LoadPlugin interface
+
+{% if with_interfaces %}
+<Plugin interface>
+{% for iface in with_interfaces %}
+	Interface "{{iface}}"
+{% endfor %}
+	IgnoreSelected false
+</Plugin>
+{% endif %}

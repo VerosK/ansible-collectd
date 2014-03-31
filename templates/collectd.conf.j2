@@ -1,0 +1,18 @@
+# {{ ansible_managed }}
+#
+# Don't touch!
+# 
+# Modify /etc/collectd.d
+
+
+Hostname    "{{ collectd_hostname }}"
+FQDNLookup   false
+#BaseDir     "/usr/var/lib/collectd"
+#PIDFile     "/usr/var/run/collectd.pid"
+#PluginDir   "/usr/lib/collectd"
+#TypesDB     "/usr/share/collectd/types.db"
+#Interval     10
+#Timeout      2
+#ReadThreads  5
+
+Include "/etc/collectd.d"

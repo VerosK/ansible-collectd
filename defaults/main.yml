@@ -1,0 +1,10 @@
+---
+collectd_plugins:
+  - cpu
+  - disk
+  - interface
+  - load
+  - memory
+  - processes
+
+collectd_hostname: "{{ ansible_hostname }}"
