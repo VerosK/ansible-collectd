@@ -7,6 +7,7 @@ Example installation
 --------------------
 
 Send data to collectd server
+
     ---
     - name: Install collectd
       hosts: all
@@ -18,6 +19,7 @@ Send data to collectd server
 
 
 Send data to collectd server
+
     ---
     - name: Install collectd and send data to collectd_server
       hosts: all
@@ -27,3 +29,10 @@ Send data to collectd server
            with_output_plugins: [ rrdtool, network  ],
            with_send_to: "collectd_server",
         }
+
+Supported output plugins:
+- rrdtool
+- network ( add `with_send_to` )
+- csv
+  
+  
