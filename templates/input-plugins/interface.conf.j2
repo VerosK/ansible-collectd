@@ -1,7 +1,11 @@
+#
 # {{ ansible_managed }}
+#
+# Don't touch.
+
 LoadPlugin interface
 
-{% if with_interfaces %}
+{% if with_interfaces is defined %}
 <Plugin interface>
 {% for iface in with_interfaces %}
 	Interface "{{iface}}"
